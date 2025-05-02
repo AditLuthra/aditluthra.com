@@ -1,0 +1,19 @@
+[
+    {
+      "id": "makrx-portal",
+      "name": "MakrX Portal",
+      "description": "A central hub to manage makerspaces, inventories, service providers, and collaborative projects.",
+      "url": "https://github.com/aditluthra/makrx-portal",
+      "source": "manual",
+      "tags": ["Next.js", "FastAPI", "Docker", "Makerspace"]
+    },
+    {
+      "id": "weirdbot",
+      "name": "WeirdBot",
+      "description": "A custom-built robot with chaotic but entertaining movement logic and sensors.",
+      "url": "https://github.com/aditluthra/weirdbot",
+      "source": "manual",
+      "tags": ["Robotics", "ESP32", "Custom PCB"]
+    }
+  ]
+  
