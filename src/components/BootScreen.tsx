@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
 import TerminalLine from "./TerminalLine";
 
 const asciiWelcome = `
@@ -45,15 +44,21 @@ export default function BootScreen() {
   }, []);
 
   useEffect(() => {
-    const handleKeyPress = () => {
-      if (bootComplete) {
-        router.push("/cli");
-      }
+    const handleContinue = () => {
+      if (bootComplete) router.push("/cli");
     };
+
     if (bootComplete) {
-      window.addEventListener("keydown", handleKeyPress);
+      window.addEventListener("keydown", handleContinue);
+      window.addEventListener("click", handleContinue);
+      window.addEventListener("touchstart", handleContinue);
     }
-    return () => window.removeEventListener("keydown", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", handleContinue);
+      window.removeEventListener("click", handleContinue);
+      window.removeEventListener("touchstart", handleContinue);
+    };
   }, [bootComplete, router]);
 
   return (
@@ -66,7 +71,7 @@ export default function BootScreen() {
       ))}
       {bootComplete && (
         <div className="mt-6 text-orange-400 animate-blink">
-          Press any key to continue...
+          Press any key or tap to continue...
         </div>
       )}
     </div>
