@@ -50,7 +50,7 @@ export default function ProjectsPage() {
   return (
     <>
       <FriendlyNav />
-      <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
+      <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel pt-20 md:pt-24">
         <h1 className="text-xl mb-4 text-terminal-neon">🛠️ Projects</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {projects.map((proj) => (

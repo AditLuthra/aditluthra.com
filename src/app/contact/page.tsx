@@ -26,7 +26,9 @@ export default function ContactPage() {
       human={
         <>
           <FriendlyNav />
-          <VisualContactCard />
+          <div className="pt-20 md:pt-24">
+            <VisualContactCard />
+          </div>
         </>
       }
       hacker={null}

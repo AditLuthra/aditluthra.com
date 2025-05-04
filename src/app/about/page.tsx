@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useTheme } from "@/context/ThemeContext";
-
 import FriendlyNav from "@/components/FriendlyNav";
 import AboutBox from "@/components/AboutBox";
 
@@ -25,7 +24,9 @@ export default function AboutPage() {
   return (
     <>
       <FriendlyNav />
-      <AboutBox />
+      <div className="pt-20 md:pt-24">
+        <AboutBox />
+      </div>
     </>
   );
 }
