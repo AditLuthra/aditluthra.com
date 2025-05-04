@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-export default function TerminalLine({ line, delay = 0 }: { line: string; delay?: number }) {
+export default function TerminalLine({
+  line,
+  delay = 0,
+}: {
+  line: string;
+  delay?: number;
+}) {
   const [displayedText, setDisplayedText] = useState("");
 
   useEffect(() => {

@@ -11,5 +11,8 @@ interface Project {
 }
 
 export function getManualProjects(): Project[] {
-  return manualProjects;
+  return manualProjects.map((proj) => ({
+    ...proj,
+    source: "manual" as const, // 🔒 Ensures type compatibility
+  }));
 }

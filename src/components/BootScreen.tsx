@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import TerminalLine from "./TerminalLine";
 import { useRouter } from "next/navigation";
+
+import TerminalLine from "./TerminalLine";
 
 const asciiWelcome = `
  _____ _             _       _ _ _   _           _           
@@ -35,8 +36,8 @@ export default function BootScreen() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      localStorage.setItem("theme", "hacker");      // ✅ set mode
-      localStorage.setItem("booted", "yes");        // ✅ optional: skip boot next time
+      localStorage.setItem("theme", "hacker");
+      localStorage.setItem("booted", "yes");
       setBootComplete(true);
     }, bootLines.length * 800 + 2000);
 
@@ -46,7 +47,7 @@ export default function BootScreen() {
   useEffect(() => {
     const handleKeyPress = () => {
       if (bootComplete) {
-        router.push("/cli");                        // ✅ fixed destination
+        router.push("/cli");
       }
     };
     if (bootComplete) {

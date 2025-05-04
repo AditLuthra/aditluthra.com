@@ -1,14 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useTheme } from "../context/ThemeContext";
+
+import { useTheme } from "@/context/ThemeContext"; // ✅ Consistent alias
 
 export default function EntryPage() {
   const router = useRouter();
   const { setTheme } = useTheme();
 
   const handleSelect = (mode: "human" | "hacker") => {
-    setTheme(mode); // optional — keep if using ThemeContext globally
+    setTheme(mode); // ✅ update global theme context
     router.push(mode === "human" ? "/human" : "/boot");
   };
 

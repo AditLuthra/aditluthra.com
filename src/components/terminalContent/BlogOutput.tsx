@@ -14,9 +14,7 @@ export default function BlogOutput() {
       lines={[
         "> cat ./philosophy.md",
         "",
-        ...posts.map(
-          (post) => `📄 ${post.title} — read at /blog/${post.slug}`
-        ),
+        ...posts.map((post) => `📄 ${post.title} — read at /blog/${post.slug}`),
         "",
         "Use: open(/blog/slug) to read.",
       ]}

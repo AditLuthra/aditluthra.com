@@ -1,9 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -24,8 +22,8 @@ const config: Config = {
       },
       keyframes: {
         blink: {
-          "0%, 100%": { opacity: 1 },
-          "50%": { opacity: 0 },
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
         },
       },
     },

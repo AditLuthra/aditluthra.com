@@ -14,9 +14,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["node"],
-    "baseUrl": ".",                               // ✅ ADD THIS
-    "paths": {                                    // ✅ AND THIS
+    "types": ["node", "react", "react-dom"],
+    "baseUrl": ".",
+    "paths": {
       "@/*": ["src/*"]
     },
     "plugins": [
@@ -26,12 +26,10 @@
     ]
   },
   "include": [
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

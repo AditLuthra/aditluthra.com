@@ -14,14 +14,14 @@ export default function AboutBox() {
           className="rounded-full border border-terminal-green"
         />
         <div>
-          <h1 className="text-xl mb-2 text-terminal-neon">Hi, I'm Adit 👋</h1>
+          <h1 className="text-xl mb-2 text-terminal-neon">Hi, I&#39;m Adit 👋</h1>
           <p className="text-sm leading-relaxed">
-            Founder @ <strong>MakrX</strong> and Botness Technologies. I'm building the world's largest
-            maker ecosystem — one experiment at a time.
+            Founder @ <strong>MakrX</strong> and Botness Technologies. I&#39;m
+            building the world&#39;s largest maker ecosystem — one experiment at a
+            time.
             <br />
-            <br />
-            I love weird robots 🤖, DIY tools 🛠, and teaching through creation. If it blinks, spins, or explodes,
-            I'm probably interested.
+            <br />I love weird robots 🤖, DIY tools 🛠, and teaching through
+            creation. If it blinks, spins, or explodes, I&#39;m probably interested.
           </p>
           <p className="text-sm mt-4 text-terminal-gray italic">
             Location: Chandigarh, India 🇮🇳

@@ -2,33 +2,34 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+
 import { useTheme } from "@/context/ThemeContext";
+
 import ThemedView from "@/components/ThemedView";
 import VisualContactCard from "@/components/VisualContactCard";
-import ContactOutput from "@/components/terminalContent/ContactOutput";
-import HumanNav from "@/components/FriendlyNav";
+import FriendlyNav from "@/components/FriendlyNav";
 
 export default function ContactPage() {
-  const { mode } = useTheme();
+  const { theme } = useTheme();
   const router = useRouter();
 
   useEffect(() => {
-    if (mode === "hacker") {
+    if (theme === "hacker") {
       router.push("/cli");
     }
-  }, [mode, router]);
+  }, [theme, router]);
 
-  if (mode === "hacker") return null;
+  if (theme === "hacker") return null;
 
   return (
     <ThemedView
       human={
         <>
-          <HumanNav />
+          <FriendlyNav />
           <VisualContactCard />
         </>
       }
-      hacker={<ContactOutput />} // This will never render; safe fallback
+      hacker={null}
     />
   );
 }

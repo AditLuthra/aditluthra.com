@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { useTheme } from "@/context/ThemeContext";
+
 import FriendlyNav from "@/components/FriendlyNav";
 import AboutBox from "@/components/AboutBox";
 

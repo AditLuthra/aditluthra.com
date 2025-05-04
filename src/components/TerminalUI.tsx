@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, type JSX } from "react";
+
 import ProjectsOutput from "./terminalContent/ProjectsOutput";
 import AboutOutput from "./terminalContent/WhoamiOutput"; // still used for whoami
 import BlogOutput from "./terminalContent/BlogOutput";
@@ -73,7 +74,7 @@ export default function TerminalUI() {
     }
   };
 
-  const handleKey = (e: React.KeyboardEvent) => {
+  const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       runCommand(input);
       setInput("");
@@ -90,7 +91,9 @@ export default function TerminalUI() {
         <div
           key={i}
           className={`whitespace-pre-wrap ${
-            typeof line === "string" || line?.type === "span" || line?.type === "div"
+            typeof line === "string" ||
+            line?.type === "span" ||
+            line?.type === "div"
               ? "mb-1"
               : ""
           }`}

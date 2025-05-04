@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { useTheme } from "@/context/ThemeContext";
 import ProjectCard from "@/components/ProjectCard";
-import ThemedView from "@/components/ThemedView";
-import TerminalOutput from "@/components/TerminalOutput";
-import HumanNav from "@/components/FriendlyNav"; // ✅ Nav for human users
+import FriendlyNav from "@/components/FriendlyNav";
 
 interface Project {
   id: string;
@@ -20,53 +19,45 @@ interface Project {
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const { mode } = useTheme();
+  const { theme } = useTheme();
   const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (mode === "hacker") {
+    setHydrated(true);
+    if (theme === "hacker") {
       router.push("/cli");
     }
-  }, [mode, router]);
+  }, [theme, router]);
 
   useEffect(() => {
-    fetch("/api/github/projects")
-      .then((res) => res.json())
-      .then(async (githubProjects) => {
+    const loadProjects = async () => {
+      try {
+        const res = await fetch("/api/github/projects");
+        const githubProjects: Project[] = await res.json();
         const { getManualProjects } = await import("@/lib/projects");
         const manualProjects = getManualProjects();
         setProjects([...manualProjects, ...githubProjects]);
-      });
+      } catch (err) {
+        console.error("Failed to fetch projects", err);
+      }
+    };
+    loadProjects();
   }, []);
 
-  if (mode === "hacker") return null;
+  if (!hydrated || theme === "hacker") return null;
 
   return (
-    <ThemedView
-      human={
-        <>
-          <HumanNav />
-          <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
-            <h1 className="text-xl mb-4 text-terminal-neon">🛠️ Projects</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {projects.map((proj) => (
-                <ProjectCard key={proj.id} project={proj} mode="human" />
-              ))}
-            </div>
-          </div>
-        </>
-      }
-      hacker={
-        <TerminalOutput
-          title="🛠️ Projects"
-          lines={[
-            "> ls ./projects",
-            ...projects.map((proj) => `📁 ${proj.name} — ${proj.description}`),
-            "",
-            "use: open(project_url) to clone or explore",
-          ]}
-        />
-      }
-    />
+    <>
+      <FriendlyNav />
+      <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
+        <h1 className="text-xl mb-4 text-terminal-neon">🛠️ Projects</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {projects.map((proj) => (
+            <ProjectCard key={proj.id} project={proj} mode="friendly" />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }

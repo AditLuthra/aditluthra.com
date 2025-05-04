@@ -1,7 +1,17 @@
 export const dynamic = "force-dynamic"; // Disable static caching
 
+interface GitHubRepo {
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  fork: boolean;
+  private: boolean;
+  stargazers_count: number;
+}
+
 export async function GET() {
-  const username = "aditluthra"; // 🔁 change if needed
+  const username = "aditluthra";
   const res = await fetch(`https://api.github.com/users/${username}/repos`);
 
   if (!res.ok) {
@@ -10,11 +20,11 @@ export async function GET() {
     });
   }
 
-  const data = await res.json();
+  const data: GitHubRepo[] = await res.json();
 
   const cleaned = data
-    .filter((repo: any) => !repo.fork && !repo.private)
-    .map((repo: any) => ({
+    .filter((repo) => !repo.fork && !repo.private)
+    .map((repo) => ({
       id: repo.id.toString(),
       name: repo.name,
       description: repo.description || "No description.",

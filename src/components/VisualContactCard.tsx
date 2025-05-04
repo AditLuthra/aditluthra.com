@@ -15,7 +15,10 @@ export default function VisualContactCard() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto border border-terminal-green p-6 rounded-xl bg-[#1a1a1a]">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-lg mx-auto border border-terminal-green p-6 rounded-xl bg-[#1a1a1a]"
+    >
       <label className="block mb-4 text-sm">
         Name:
         <input
@@ -43,7 +46,9 @@ export default function VisualContactCard() {
         ✉️ Send Message
       </button>
       {sent && (
-        <p className="text-sm mt-2 text-terminal-neon">✅ Opening your email client...</p>
+        <p className="text-sm mt-2 text-terminal-neon">
+          ✅ Opening your email client...
+        </p>
       )}
     </form>
   );

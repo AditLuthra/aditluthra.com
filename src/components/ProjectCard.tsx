@@ -27,7 +27,10 @@ export default function ProjectCard({
       {project.tags && (
         <div className="flex flex-wrap gap-1 text-xs text-terminal-gray">
           {project.tags.map((tag, idx) => (
-            <span key={idx} className="border border-terminal-gray px-2 py-0.5 rounded">
+            <span
+              key={idx}
+              className="border border-terminal-gray px-2 py-0.5 rounded"
+            >
               {tag}
             </span>
           ))}

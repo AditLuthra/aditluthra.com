@@ -1,11 +1,22 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": ["react", "jsx-a11y", "import"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "react/jsx-key": "warn",
     "react/react-in-jsx-scope": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
     "no-console": "off",
+    "react/no-unescaped-entities": "warn",
     "import/order": [
       "warn",
       {

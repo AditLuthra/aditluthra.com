@@ -5,12 +5,16 @@
 /* Base styling */
 html {
   scroll-behavior: smooth;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 body {
   @apply font-pixel bg-terminal-black text-terminal-green;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Blinking cursor */
@@ -23,6 +27,6 @@ body {
 
 /* Text selection */
 ::selection {
-  background-color: #39FF14;
+  background-color: #39ff14;
   color: black;
 }

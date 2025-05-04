@@ -17,7 +17,9 @@ export default function ASCIIForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
       {sent ? (
-        <p className="text-terminal-neon text-sm">🎉 Redirecting to email client...</p>
+        <p className="text-terminal-neon text-sm">
+          🎉 Redirecting to email client...
+        </p>
       ) : (
         <>
           <label className="text-sm">

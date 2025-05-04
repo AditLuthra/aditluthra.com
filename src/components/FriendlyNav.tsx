@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+
 import { useTheme } from "@/context/ThemeContext";
 
 export default function FriendlyNav() {
@@ -15,7 +16,7 @@ export default function FriendlyNav() {
   return (
     <nav className="fixed top-4 right-4 flex gap-3 bg-terminal-black text-terminal-green border border-terminal-green px-4 py-2 rounded-md z-50 font-pixel text-sm md:text-base shadow-lg">
       <Link href="/human" className="hover:text-lime-400 transition">
-      🏠 Home
+        🏠 Home
       </Link>
       <Link href="/about" className="hover:text-lime-400 transition">
         👨‍🔧 About

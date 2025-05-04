@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, type JSX } from "react";
 
 interface Project {
   id: string;
@@ -34,7 +34,7 @@ export default function ProjectsOutput(): JSX.Element {
       <div>🛠️ PROJECTS</div>
       <div>{"----------------------"}</div>
       {projects.map((proj, i) => (
-        <div key={i} className="mb-3">
+        <div key={proj.id ?? i} className="mb-3">
           <div>{`> ${proj.name}`}</div>
           <div>{`# ${proj.description}`}</div>
           <div>{`🌐 ${proj.url}`}</div>
