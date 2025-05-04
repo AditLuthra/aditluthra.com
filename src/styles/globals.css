@@ -17,6 +17,9 @@ body {
 .cursor-blink {
   @apply animate-blink;
 }
+.pixelated {
+  image-rendering: pixelated;
+}
 
 /* Text selection */
 ::selection {

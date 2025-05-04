@@ -1,27 +1,29 @@
 "use client";
 
-import { useTheme } from "../../context/ThemeContext";
-import AboutBox from "../../components/AboutBox";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTheme } from "@/context/ThemeContext";
+import FriendlyNav from "@/components/FriendlyNav";
+import AboutBox from "@/components/AboutBox";
 
 export default function AboutPage() {
-  const { mode } = useTheme();
+  const { theme } = useTheme();
+  const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
 
-  if (mode === "friendly") return <AboutBox />;
+  useEffect(() => {
+    setHydrated(true);
+    if (theme === "hacker") {
+      router.push("/cli");
+    }
+  }, [theme, router]);
+
+  if (!hydrated || theme === "hacker") return null;
 
   return (
-    <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
-      <pre className="whitespace-pre-wrap text-sm leading-relaxed">
-{`> whoami
-Adit Luthra
------------------------------
-🛠 Founder @ MakrX, Botness Technologies
-🎯 Mission: Build the world's biggest maker ecosystem
-🤖 Loves: robots, 3D printing, weird projects, power electronics
-🧠 Believer in making over memorizing, and learning by building
-🌍 From: Chandigarh, India
-
-Dream. Make. Share.`}
-      </pre>
-    </div>
+    <>
+      <FriendlyNav />
+      <AboutBox />
+    </>
   );
 }

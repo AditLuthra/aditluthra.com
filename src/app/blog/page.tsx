@@ -1,27 +1,42 @@
-// REMOVE: "use client"
-import fs from "fs";
-import path from "path";
-import { useTheme } from "../../context/ThemeContext";
-import Link from "next/link";
-import BlogDisk from "../../components/BlogDisk";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTheme } from "@/context/ThemeContext";
+
+import FriendlyNav from "@/components/FriendlyNav";
+import BlogDisk from "@/components/BlogDisk";
+
+const posts = [
+  { slug: "why-i-build-weird-things", title: "Why I Build Weird Things" },
+  { slug: "robots-i-loved", title: "Robots I Loved" },
+];
 
 export default function BlogListPage() {
-  const posts = fs
-    .readdirSync("src/content/blog")
-    .filter((f) => f.endsWith(".md"))
-    .map((f) => ({
-      slug: f.replace(/\.md$/, ""),
-      title: f.replace(/\.md$/, "").replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-    }));
+  const { theme } = useTheme();
+  const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+    if (theme === "hacker") {
+      router.push("/cli");
+    }
+  }, [theme, router]);
+
+  if (!hydrated || theme === "hacker") return null;
 
   return (
-    <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
-      <h1 className="text-xl mb-4 text-terminal-neon">📓 Blog</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {posts.map((post) => (
-          <BlogDisk key={post.slug} slug={post.slug} title={post.title} />
-        ))}
+    <>
+      <FriendlyNav />
+      <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
+        <h1 className="text-xl mb-4 text-terminal-neon">💾 Blog</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {posts.map((post) => (
+            <BlogDisk key={post.slug} slug={post.slug} title={post.title} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -35,7 +35,8 @@ export default function BootScreen() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      localStorage.setItem("theme", "hacker");
+      localStorage.setItem("theme", "hacker");      // ✅ set mode
+      localStorage.setItem("booted", "yes");        // ✅ optional: skip boot next time
       setBootComplete(true);
     }, bootLines.length * 800 + 2000);
 
@@ -45,7 +46,7 @@ export default function BootScreen() {
   useEffect(() => {
     const handleKeyPress = () => {
       if (bootComplete) {
-        router.push("/home");
+        router.push("/cli");                        // ✅ fixed destination
       }
     };
     if (bootComplete) {

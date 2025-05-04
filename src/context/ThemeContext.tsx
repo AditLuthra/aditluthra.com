@@ -1,38 +1,46 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-type ThemeMode = "hacker" | "friendly";
+type Theme = "human" | "hacker";
 
-const ThemeContext = createContext<{
-  mode: ThemeMode;
+interface ThemeContextType {
+  theme: Theme;
+  setTheme: (mode: Theme) => void;
   toggleMode: () => void;
-}>({
-  mode: "hacker",
+}
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: "human",
+  setTheme: () => {},
   toggleMode: () => {},
 });
 
+export const useTheme = () => useContext(ThemeContext);
+
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [mode, setMode] = useState<ThemeMode>("hacker");
+  const [theme, setThemeState] = useState<Theme>("human");
 
   useEffect(() => {
     const stored = localStorage.getItem("theme");
-    if (stored === "friendly" || stored === "hacker") {
-      setMode(stored as ThemeMode);
+    if (stored === "human" || stored === "hacker") {
+      setThemeState(stored);
     }
   }, []);
 
+  const setTheme = (mode: Theme) => {
+    localStorage.setItem("theme", mode);
+    setThemeState(mode);
+  };
+
   const toggleMode = () => {
-    const next = mode === "hacker" ? "friendly" : "hacker";
-    setMode(next);
-    localStorage.setItem("theme", next);
+    const newMode = theme === "human" ? "hacker" : "human";
+    setTheme(newMode);
   };
 
   return (
-    <ThemeContext.Provider value={{ mode, toggleMode }}>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleMode }}>
       {children}
     </ThemeContext.Provider>
   );
 };
-
-export const useTheme = () => useContext(ThemeContext);
