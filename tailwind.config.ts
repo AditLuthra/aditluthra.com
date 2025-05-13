@@ -28,7 +28,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/typography"), // ✅ Enable prose styles for markdown
+  ],
 };
 
 export default config;

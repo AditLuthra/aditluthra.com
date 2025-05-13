@@ -7,9 +7,9 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "module": "ESNext",                         // ✅ Required for ts-node-esm
+    "moduleResolution": "Node",                // ✅ Node resolution
     "esModuleInterop": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -29,7 +29,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "scripts/**/*.ts"                         // ✅ Include the scripts folder
   ],
   "exclude": ["node_modules"]
 }
