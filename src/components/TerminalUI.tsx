@@ -14,7 +14,6 @@ import BlogOutput from "./terminalContent/BlogOutput";
 import ContactOutput from "./terminalContent/ContactOutput";
 
 import blogPosts from "@/content/blogIndex.json";
-import manualProjects from "@/content/projects.json";
 
 interface GitHubProject {
   name: string;
@@ -137,10 +136,9 @@ export default function TerminalUI() {
 
         const target = normalize(userInput);
 
-        const manual = manualProjects.find((p) => normalize(p.name) === target);
         const github = githubProjects.find((p) => normalize(p.name) === target);
 
-        const url = manual?.url || github?.url;
+        const url = github?.url;
 
         if (url) {
           addLine(`🌐 Opening: ${url}`);
