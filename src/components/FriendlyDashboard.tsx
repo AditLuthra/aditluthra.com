@@ -28,8 +28,8 @@ export default function FriendlyDashboard() {
             <Image
               src="/images/adit-avatar.png"
               alt="Adit pixel avatar"
-              width={100}
-              height={100}
+              width={160}
+              height={160}
               className="border border-[#39FF14] pixelated"
             />
             <div className="text-base leading-snug text-white">

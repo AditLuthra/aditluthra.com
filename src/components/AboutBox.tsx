@@ -9,8 +9,8 @@ export default function AboutBox() {
         <Image
           src="/images/adit-avatar.png"
           alt="Adit Avatar"
-          width={100}
-          height={100}
+          width={200}
+          height={200}
           className="rounded-full border border-terminal-green"
         />
         <div>
