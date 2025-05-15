@@ -148,6 +148,12 @@ export default function TerminalUI() {
         }
         break;
       }
+      case "manifest": {
+        addLine("📂 Hello companies and recruiters — you’ve unlocked Adit’s secret manifest page.");
+        window.open("/manifest", "_blank");
+        break;
+      }
+
 
       default:
         addLine(<div className="text-red-400">❌ Command not found: {command}</div>);

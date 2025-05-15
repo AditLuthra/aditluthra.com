@@ -5,7 +5,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        pixel: ["var(--font-vt323)", "monospace"],
+        pixel: ["var(--font-vt323)", "monospace"], // For pixel headings
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"], // For body content
       },
       colors: {
         "terminal-green": "#00FF41",
@@ -18,7 +19,7 @@ const config: Config = {
         "project-blue": "#0D1A2D",
       },
       animation: {
-        blink: "blink 1.2s infinite",
+        blink: "blink 1.2s step-end infinite",
       },
       keyframes: {
         blink: {
@@ -29,7 +30,7 @@ const config: Config = {
     },
   },
   plugins: [
-    require("@tailwindcss/typography"), // ✅ Enable prose styles for markdown
+    require("@tailwindcss/typography"), // Optional: for Markdown rendering
   ],
 };
 
