@@ -13,8 +13,16 @@ interface Project {
 }
 
 async function fetchGitHubProjects(): Promise<Project[]> {
+  const isServer = typeof window === "undefined";
+
+  const baseUrl = isServer
+    ? process.env.NODE_ENV === "production"
+      ? "https://aditluthra.com"
+      : "https://aditluthra-com.vercel.app"
+    : window.location.origin;
+
   try {
-    const res = await fetch(`/api/github/projects`, { cache: "no-store" });
+    const res = await fetch(`${baseUrl}/api/github/projects`, { cache: "no-store" });
     if (!res.ok) throw new Error("GitHub API error");
     return await res.json();
   } catch (err) {
@@ -98,9 +106,6 @@ export default async function ManifestPage() {
               >
                 <h3 className="font-bold text-[22px] font-pixel">{proj.name}</h3>
                 <p className="mt-2 text-base text-gray-700 font-sans">{proj.description}</p>
-                {proj.source === "github" && proj.stars !== null && (
-                  <p className="mt-2 text-xs text-gray-500 font-sans">⭐ {proj.stars} GitHub</p>
-                )}
               </a>
             ))}
           </div>
