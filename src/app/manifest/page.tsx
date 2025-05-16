@@ -16,9 +16,7 @@ async function fetchGitHubProjects(): Promise<Project[]> {
   const isServer = typeof window === "undefined";
 
   const baseUrl = isServer
-    ? process.env.NODE_ENV === "production"
-      ? "https://aditluthra.com"
-      : "https://aditluthra-com.vercel.app"
+    ? "https://aditluthra.com" // works for Vercel/prod
     : window.location.origin;
 
   try {
@@ -41,14 +39,13 @@ export default async function ManifestPage() {
   return (
     <main className={`${vt323.variable} ${inter.variable} bg-[#FAFAFA] text-black`}>
       <div className="max-w-4xl mx-auto px-4 py-10">
-
-        {/* Big Pixel Title */}
+        {/* Header */}
         <h1 className="text-6xl font-bold font-pixel text-center mb-2 mt-2">Adit Luthra</h1>
         <p className="text-green-700 text-3xl font-pixel font-semibold text-center mb-6">
           Maker • Innovator • Explorer
         </p>
 
-        {/* Avatar + Bio Row */}
+        {/* Avatar + Bio */}
         <div className="flex flex-col items-center w-full">
           <div className="flex flex-col sm:flex-row items-center w-full justify-center mb-6 gap-6">
             <Image

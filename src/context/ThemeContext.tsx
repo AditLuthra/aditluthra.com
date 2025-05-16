@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type Theme = "human" | "hacker";
 
@@ -18,14 +24,16 @@ const ThemeContext = createContext<ThemeContextType>({
 
 export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setThemeState] = useState<Theme>("human");
+  const [hydrated, setHydrated] = useState(false); // 🧠 important
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
+    const stored = localStorage.getItem("theme") as Theme | null;
     if (stored === "human" || stored === "hacker") {
       setThemeState(stored);
     }
+    setHydrated(true); // ✅ now we're ready to render children
   }, []);
 
   const setTheme = (mode: Theme) => {
@@ -37,6 +45,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const newMode = theme === "human" ? "hacker" : "human";
     setTheme(newMode);
   };
+
+  // 🧠 Prevent early render glitches
+  if (!hydrated) return null;
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleMode }}>
