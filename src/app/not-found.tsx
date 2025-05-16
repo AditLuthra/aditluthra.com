@@ -63,7 +63,6 @@ export default function NotFound() {
     const interval = setInterval(() => {
       const newHead = getNextCoord(snake[0], nextDir.current);
 
-      // Check collisions
       if (
         newHead[0] < 0 || newHead[0] >= WIDTH ||
         newHead[1] < 0 || newHead[1] >= HEIGHT ||
@@ -74,8 +73,6 @@ export default function NotFound() {
       }
 
       const newSnake = [newHead, ...snake];
-
-      // Ate fruit?
       if (newHead[0] === fruit[0] && newHead[1] === fruit[1]) {
         setFruit(randomCoord());
       } else {
@@ -97,7 +94,6 @@ export default function NotFound() {
         const isHead = snake[0][0] === x && snake[0][1] === y;
         const isBody = snake.some(([sx, sy], i) => i !== 0 && sx === x && sy === y);
         const isFruit = fruit[0] === x && fruit[1] === y;
-
         row += isHead ? "O" : isBody ? "o" : isFruit ? "*" : " ";
       }
       grid.push(row);
@@ -125,6 +121,26 @@ export default function NotFound() {
         </pre>
       </div>
 
+      {/* Mobile Controls */}
+      <div className="mt-4 flex flex-col items-center md:hidden">
+        <div className="flex gap-4 mb-2">
+          <button onClick={() => (nextDir.current = "up")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+            ↑
+          </button>
+        </div>
+        <div className="flex gap-4">
+          <button onClick={() => (nextDir.current = "left")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+            ←
+          </button>
+          <button onClick={() => (nextDir.current = "down")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+            ↓
+          </button>
+          <button onClick={() => (nextDir.current = "right")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+            →
+          </button>
+        </div>
+      </div>
+
       {gameOver && (
         <div className="mt-4 text-red-400 text-center">
           <p>💀 You crashed!</p>
@@ -138,7 +154,7 @@ export default function NotFound() {
       )}
 
       {!started && !gameOver && (
-        <p className="mt-3 text-sm text-terminal-gray">Press arrow keys to start</p>
+        <p className="mt-3 text-sm text-terminal-gray">Press arrow keys or tap to start</p>
       )}
 
       <button
