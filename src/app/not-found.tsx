@@ -124,18 +124,42 @@ export default function NotFound() {
       {/* Mobile Controls */}
       <div className="mt-4 flex flex-col items-center md:hidden">
         <div className="flex gap-4 mb-2">
-          <button onClick={() => (nextDir.current = "up")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+          <button
+            onClick={() => {
+              nextDir.current = "up";
+              if (!started) setStarted(true);
+            }}
+            className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black"
+          >
             ↑
           </button>
         </div>
         <div className="flex gap-4">
-          <button onClick={() => (nextDir.current = "left")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+          <button
+            onClick={() => {
+              nextDir.current = "left";
+              if (!started) setStarted(true);
+            }}
+            className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black"
+          >
             ←
           </button>
-          <button onClick={() => (nextDir.current = "down")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+          <button
+            onClick={() => {
+              nextDir.current = "down";
+              if (!started) setStarted(true);
+            }}
+            className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black"
+          >
             ↓
           </button>
-          <button onClick={() => (nextDir.current = "right")} className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black">
+          <button
+            onClick={() => {
+              nextDir.current = "right";
+              if (!started) setStarted(true);
+            }}
+            className="px-4 py-2 border border-terminal-green rounded hover:bg-terminal-green hover:text-black"
+          >
             →
           </button>
         </div>
