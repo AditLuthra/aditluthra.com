@@ -1,11 +1,7 @@
 "use client";
 
+import blogPosts from "@/content/blogIndex.json";
 import TerminalOutput from "../TerminalOutput";
-
-const posts = [
-  { slug: "why-i-build-weird-things", title: "Why I Build Weird Things" },
-  { slug: "robots-i-loved", title: "Robots I Loved" },
-];
 
 export default function BlogOutput() {
   return (
@@ -14,9 +10,9 @@ export default function BlogOutput() {
       lines={[
         "> cat ./philosophy.md",
         "",
-        ...posts.map((post) => `📄 ${post.title} — read at /blog/${post.slug}`),
+        ...blogPosts.map((post) => `📄 ${post.title} — read at /blog/${post.slug}`),
         "",
-        "Use: open(/blog/slug) to read.",
+        "Use: read [slug] to read.",
       ]}
     />
   );

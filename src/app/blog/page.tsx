@@ -1,45 +1,76 @@
-"use client";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { Metadata } from "next";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-import { useTheme } from "@/context/ThemeContext";
-
-import FriendlyNav from "@/components/FriendlyNav";
 import BlogDisk from "@/components/BlogDisk";
+import FriendlyNav from "@/components/FriendlyNav";
 
-const posts = [
-  { slug: "why-i-build-weird-things", title: "Why I Build Weird Things" },
-  { slug: "robots-i-loved", title: "Robots I Loved" },
-];
+export const metadata: Metadata = {
+  title: "💾 Blog | Adit Luthra",
+};
+
+interface Post {
+  slug: string;
+  title: string;
+  excerpt?: string;
+  date?: string;
+}
+
+function getBlogPosts(): Post[] {
+  const blogDir = path.join(process.cwd(), "src/content/blog");
+  const files = fs.readdirSync(blogDir);
+
+  return files
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => {
+      const content = fs.readFileSync(path.join(blogDir, file), "utf8");
+      const { data } = matter(content);
+      const slug = file.replace(/\.md$/, "");
+
+      return {
+        slug,
+        title: data.title || slug,
+        excerpt: data.excerpt || "",
+        date: data.date || "1970-01-01",
+      };
+    })
+    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
+}
 
 export default function BlogListPage() {
-  const { theme } = useTheme();
-  const router = useRouter();
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    setHydrated(true);
-    if (theme === "hacker") {
-      router.push("/cli");
-    }
-  }, [theme, router]);
-
-  if (!hydrated || theme === "hacker") return null;
+  const posts = getBlogPosts();
 
   return (
     <>
       <FriendlyNav />
-      <div className="pt-20 md:pt-24">
-        <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
-          <h1 className="text-xl mb-4 text-terminal-neon">💾 Blog</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <main className="pt-20 md:pt-24 px-6">
+        <h1 className="text-xl mb-6 text-terminal-neon">💾 Blog</h1>
+        {posts.length === 0 ? (
+          <p className="text-sm text-terminal-gray">No blog posts yet. Stay tuned!</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {posts.map((post) => (
-              <BlogDisk key={post.slug} slug={post.slug} title={post.title} />
+              <BlogDisk
+                key={post.slug}
+                slug={post.slug}
+                title={post.title}
+                excerpt={post.excerpt}
+                date={post.date}
+              />
             ))}
           </div>
+        )}
+
+        <div className="mt-12 border-t border-terminal-green pt-6 text-sm text-terminal-gray">
+          <p>
+            Want more? Follow my builds and brainwaves.{" "}
+            <a href="/contact" className="underline text-terminal-neon">
+              Let’s build something.
+            </a>
+          </p>
         </div>
-      </div>
+      </main>
     </>
   );
 }

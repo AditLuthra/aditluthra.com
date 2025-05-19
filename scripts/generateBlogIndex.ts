@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const matter = require("gray-matter");
 
 const blogDir = path.join(__dirname, "../src/content/blog");
 const outputPath = path.join(__dirname, "../src/content/blogIndex.json");
@@ -13,12 +14,20 @@ function generateIndex(): void {
     .filter((file: string) => file.endsWith(".md"))
     .map((file: string) => {
       const slug = file.replace(/\.md$/, "");
-      const fullContent = fs.readFileSync(path.join(blogDir, file), "utf8");
-      const lines: string[] = fullContent.split("\n").filter((line: string) => line.trim().length > 0);
-      const title: string = lines[0]?.replace(/^# /, "").trim() || slug;
-      const content: string = lines.slice(1).join("\n").trim();
+      const fullPath = path.join(blogDir, file);
+      const fileContent = fs.readFileSync(fullPath, "utf8");
 
-      return { slug, title, content };
+      const { data, content } = matter(fileContent);
+
+      return {
+        slug,
+        title: data.title || slug,
+        date: data.date || null,
+        excerpt: data.excerpt || "",
+        tags: data.tags || [],
+        coverImage: data.coverImage || "",
+        content: content.trim(),
+      };
     });
 
   fs.writeFileSync(outputPath, JSON.stringify(posts, null, 2));
