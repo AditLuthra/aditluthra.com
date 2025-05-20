@@ -15,30 +15,30 @@ export default function BlogMarkdown({ content }: { content: string }) {
             />
           ),
           p: ({ node, children }) => (
-            <p className="mb-4 leading-relaxed">{children}</p>
+            <p className="mb-4 leading-relaxed">{children ?? null}</p>
           ),
           h2: ({ node, children }) => (
             <h2 className="mt-8 mb-4 text-2xl font-bold text-terminal-neon">
-              {children}
+              {children ?? null}
             </h2>
           ),
           h3: ({ node, children }) => (
             <h3 className="mt-6 mb-3 text-xl font-semibold text-terminal-yellow">
-              {children}
+              {children ?? null}
             </h3>
           ),
           em: ({ node, children }) => (
             <div className="text-center text-base italic text-terminal-gray mt-1">
-              {children}
+              {children ?? null}
             </div>
           ),
           ul: ({ node, children }) => (
             <ul className="list-disc list-inside text-terminal-green mb-4">
-              {children}
+              {children ?? null}
             </ul>
           ),
           li: ({ node, children }) => (
-            <li className="mb-1">{children}</li>
+            <li className="mb-1">{children ?? null}</li>
           ),
         }}
       >

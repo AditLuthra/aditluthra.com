@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 import { vt323, inter } from "../fonts";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${vt323.variable} ${inter.variable}`}>
       <body className="font-pixel bg-terminal-black text-terminal-green">
-        <Analytics />
+         <Analytics />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
