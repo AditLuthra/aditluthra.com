@@ -1,8 +1,13 @@
 import fs from "fs";
 import path from "path";
+import dynamic from "next/dynamic";
 
 import { getPostBySlug } from "../../../lib/markdown";
-import BlogMarkdown from "../../../components/BlogMarkdown";
+
+// 👇 Dynamically import BlogMarkdown (client-only)
+const BlogMarkdown = dynamic(() => import("../../../components/BlogMarkdown"), {
+  ssr: false,
+});
 
 export async function generateStaticParams() {
   const dir = path.join(process.cwd(), "src/content/blog");
@@ -23,7 +28,7 @@ export default async function BlogPost({
     );
 
   return (
-    <div className="min-h-screen bg-terminal-black text-terminal-green p-6 font-pixel">
+    <div className="min-h-screen bg-terminal-black text-white p-6 font-pixel">
       <h1 className="text-xl mb-4">{post.title}</h1>
       <BlogMarkdown content={post.content} />
     </div>
