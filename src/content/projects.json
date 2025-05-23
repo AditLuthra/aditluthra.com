@@ -1,15 +1,6 @@
 [
   {
     "id": "resume-1",
-    "name": "MakrX Ecosystem",
-    "description": "Integrated makerspace & e-commerce platform with IoT-enabled service management.",
-    "url": "https://makrx.org",
-    "source": "manual",
-    "stars": null,
-    "tags": ["IoT", "Automation"]
-  },
-  {
-    "id": "resume-2",
     "name": "Autonomous Underwater Vehicle",
     "description": "Machine vision based submerged robotic explorer.",
     "url": "",
@@ -18,7 +9,7 @@
     "tags": ["Robotics"]
   },
   {
-    "id": "resume-3",
+    "id": "resume-2",
     "name": "Line-Following High-Speed Robot",
     "description": "Custom-built fast, agile robotics platform.",
     "url": "",
