@@ -9,13 +9,13 @@ export default function ContactOutput() {
       lines={[
         "> ping adit@makrx.org",
         "",
-        "✉️ Email: adit@makrx.org",
+        "✉️ Email: aditluthra0@gmail.com",
         "🔗 LinkedIn: linkedin.com/in/aditluthra",
         "🌐 Website: aditluthra.com",
         "",
         "You can also send ASCII art or memes. I appreciate those too.",
         "",
-        "Use: mailto(adit@makrx.org) to open your mail client.",
+        "Use: mailto(aditluthra0@gmail.com) to open your mail client.",
       ]}
     />
   );

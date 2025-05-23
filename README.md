@@ -67,7 +67,7 @@ npm run dev
 
 ## 🌐 Deployment
 
-Deployed on [Vercel](https://vercel.com), because time is better spent building, not configuring.
+Deployed on [Vercel](https://vercel.com).
 
 Things to check:
 - `favicon.ico` → lives in `/public`  

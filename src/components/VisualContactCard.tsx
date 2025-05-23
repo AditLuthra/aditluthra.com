@@ -14,7 +14,7 @@ export default function VisualContactCard() {
   const [form, setForm] = useState({ name: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const mailtoLink = `mailto:adit@makrx.org?subject=Hello from ${form.name}&body=${encodeURIComponent(form.message)}`;
+  const mailtoLink = `mailto:aditluthra0@gmail.com?subject=Hello from ${form.name}&body=${encodeURIComponent(form.message)}`;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ export default function VisualContactCard() {
     {
       icon: <FaEnvelope />,
       label: "Email",
-      href: "mailto:adit@makrx.org",
+      href: "mailto:aditluthra0@gmail.com",
     },
   ];
 
