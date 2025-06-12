@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface Project {
   id: string;
   name: string;
@@ -24,6 +26,7 @@ export default function ProjectCard({
         </span>
       </div>
       <p className="text-sm mb-2">{project.description}</p>
+
       {project.tags && (
         <div className="flex flex-wrap gap-1 text-xs text-terminal-gray">
           {project.tags.map((tag, idx) => (
@@ -36,24 +39,37 @@ export default function ProjectCard({
           ))}
         </div>
       )}
+
       {project.stars !== undefined && (
         <div className="text-xs mt-2">⭐ {project.stars} stars</div>
       )}
+
+      {/* ✅ View Logbook Button */}
+      <Link
+        href={`/logbook/${project.name}`}
+        className="inline-block mt-4 bg-transparent border border-terminal-green text-terminal-green px-3 py-1 text-xs rounded font-bold hover:bg-terminal-green hover:text-black transition"
+      >
+        View Logbook
+      </Link>
     </>
   );
 
   return (
-    <a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`block border p-4 rounded transition ${
+    <div
+      className={`border p-4 rounded transition ${
         mode === "hacker"
           ? "border-terminal-green hover:bg-terminal-neon hover:text-black"
           : "border-[#ccc] bg-[#1b1b1b] hover:bg-terminal-neon hover:text-black"
       }`}
     >
-      {shared}
-    </a>
+      <a
+        href={project.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
+        {shared}
+      </a>
+    </div>
   );
 }
