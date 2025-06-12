@@ -9,15 +9,20 @@ interface Log {
   id: string;
   content: string;
   created_at: string;
+  project_slug: string;
 }
 
 export default function LogStreamPage() {
   const { slug } = useParams();
-  const projectSlug = typeof slug === "string" ? slug : Array.isArray(slug) ? slug[0] : "";
+  const projectSlug =
+    typeof slug === "string" ? slug : Array.isArray(slug) ? slug[0] : "";
+
   const [logs, setLogs] = useState<Log[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!projectSlug) return;
+
     const fetchLogs = async () => {
       const { data, error } = await supabase
         .from("log_entries")
@@ -25,26 +30,42 @@ export default function LogStreamPage() {
         .eq("project_slug", projectSlug)
         .order("created_at", { ascending: true });
 
-      if (data) setLogs(data);
+      if (error) {
+        console.error("❌ Error fetching logs:", error.message);
+        return;
+      }
+
+      setLogs(data || []);
     };
 
     fetchLogs();
 
     const channel = supabase
-      .channel("realtime:log_entries")
+      .channel(`log_entries:project:${projectSlug}`)
       .on(
         "postgres_changes",
         {
           event: "INSERT",
           schema: "public",
           table: "log_entries",
-          filter: `project_slug=eq.${projectSlug}`,
         },
         (payload) => {
-          setLogs((prev) => [...prev, payload.new as Log]);
+          const newLog = payload.new as Log;
+          console.log("📥 New realtime log:", newLog);
+
+          if (newLog.project_slug === projectSlug) {
+            setLogs((prev) => [...prev, newLog]);
+          }
         }
-      )
-      .subscribe();
+      );
+
+    channel.subscribe((status) => {
+      if (status === "SUBSCRIBED") {
+        console.log("✅ Realtime subscription ready.");
+      } else {
+        console.warn("⚠️ Realtime subscription status:", status);
+      }
+    });
 
     return () => {
       supabase.removeChannel(channel);
@@ -65,7 +86,9 @@ export default function LogStreamPage() {
       >
         <div className="whitespace-pre-wrap text-sm space-y-2 font-mono">
           {logs.length === 0 ? (
-            <p className="text-terminal-gray">No logs found for "{projectSlug}"</p>
+            <p className="text-terminal-gray">
+              No logs found for "{projectSlug}"
+            </p>
           ) : (
             logs.map((log) => (
               <p key={log.id}>
