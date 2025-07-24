@@ -1,4 +1,10 @@
-export const dynamic = "force-dynamic"; // disable static cache
+export const dynamic = "force-dynamic";
+
+interface GitHubRepo {
+  name: string;
+  fork: boolean;
+  private: boolean;
+}
 
 export async function GET() {
   try {
@@ -7,11 +13,11 @@ export async function GET() {
       throw new Error("Failed to fetch GitHub repos");
     }
 
-    const repos = await githubRes.json();
+    const repos: GitHubRepo[] = await githubRes.json();
 
     const projectSlugs = repos
-      .filter((r: any) => !r.fork && !r.private)
-      .map((r: any) => r.name);
+      .filter((r) => !r.fork && !r.private)
+      .map((r) => r.name);
 
     return new Response(JSON.stringify({ projects: projectSlugs }), {
       headers: { "Content-Type": "application/json" },
