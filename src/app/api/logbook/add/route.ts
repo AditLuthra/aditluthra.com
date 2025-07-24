@@ -1,7 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
-// 🔐 Use environment variables
+// Define GitHubRepo type
+interface GitHubRepo {
+  name: string;
+  fork: boolean;
+  private: boolean;
+}
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -19,9 +25,9 @@ export async function POST(req: NextRequest) {
 
     // ✅ Validate slug against GitHub
     const githubRes = await fetch("https://api.github.com/users/aditluthra/repos");
-    const githubRepos = await githubRes.json();
+    const githubRepos: GitHubRepo[] = await githubRes.json();
 
-    const validSlugs = githubRepos.map((r: any) => r.name);
+    const validSlugs = githubRepos.map((r) => r.name);
     if (!validSlugs.includes(project_slug)) {
       return NextResponse.json({ error: "Invalid project slug" }, { status: 400 });
     }
