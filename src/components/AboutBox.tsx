@@ -15,22 +15,30 @@ export default function AboutBox() {
           className="rounded-full border border-terminal-green shadow-xl"
         />
         <div className="text-sm leading-relaxed space-y-4">
-          <h1 className="text-2xl font-bold text-terminal-neon">> Hello, World. I'm Adit 🧠⚡</h1>
+          <h1 className="text-2xl font-bold text-terminal-neon">
+            {"> Hello, World. I'm Adit 🧠⚡"}
+          </h1>
 
           <p>
-            I build weird things that sometimes work and always spark curiosity. Founder @ <strong>MakrX</strong> — on a mission to create the <b>ultimate playground for makers, rebels, and garage geniuses</b>.
+            I build weird things that sometimes work and always spark curiosity.
+            Founder @ <strong>MakrX</strong> — on a mission to create the <b>ultimate
+            playground for makers, rebels, and garage geniuses</b>.
           </p>
 
           <p>
-            Currently cooking up: robots that misbehave 🤖, walls that glow 🌌, tools that teach themselves 🧰, and machines that make more machines 🧪.
+            Currently cooking up: robots that misbehave 🤖, walls that glow 🌌, tools
+            that teach themselves 🧰, and machines that make more machines 🧪.
           </p>
 
           <p>
-            I believe in <em>"Build first, debug later"</em> and that <strong>chaos is a feature, not a bug</strong>. If it blinks, spins, floats, explodes, or accidentally becomes sentient — I’m probably behind it.
+            I believe in <em>"Build first, debug later"</em> and that <strong>chaos is
+            a feature, not a bug</strong>. If it blinks, spins, floats, explodes, or
+            accidentally becomes sentient — I’m probably behind it.
           </p>
 
           <p>
-            Operating out of Chandigarh, India 🇮🇳 — but mentally stationed in a maker space orbiting Saturn. 🌍🪐
+            Operating out of Chandigarh, India 🇮🇳 — but mentally stationed in a maker
+            space orbiting Saturn. 🌍🪐
           </p>
 
           <div className="pt-4 border-t border-terminal-green space-y-2">
